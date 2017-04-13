@@ -33,8 +33,8 @@ object WordsAnalyzer extends App {
   }
 
   def mostPopularWord(lines: Iterable[String], limit: Int) = {
-    val words = lines.flatMap(removePunctuationAndDigitCharacters(_).split("\\s+"))
-    val wordCounts = words.groupBy(identity).map { case (k, v) => (k, v.size)}
+    val words = lines.flatMap(removePunctuationAndDigitCharacters(_).split("\\s+")).filterNot(_.isEmpty)
+    val wordCounts = words.groupBy(identity).mapValues(_.size)
     wordCounts.toList.sortBy(_._2)(Ordering[Int].reverse).take(limit).map(_._1)
   }
 }
