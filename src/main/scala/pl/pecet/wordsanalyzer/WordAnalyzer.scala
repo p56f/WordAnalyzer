@@ -18,7 +18,8 @@ object WordsAnalyzer extends App {
   mostPopularWord(episodeDialogs, args(0).toInt) foreach println
 
   def findEpisodeDialogs(season: String, episode: Int) = {
-    val html = Source.fromURL(f"http://www.springfieldspringfield.co.uk/view_episode_scripts.php?tv-show=friends&episode=${season}e$episode%02d")
+    val url = f"http://www.springfieldspringfield.co.uk/view_episode_scripts.php?tv-show=friends&episode=${season}e$episode%02d"
+    val html = Source.fromURL(url)
     val divPattern = """(?s)<div class="scrolling-script-container">(.*?)</div>""".r
     divPattern.findFirstMatchIn(html.mkString) match {
       case Some(m) => m.group(1).trim
@@ -28,7 +29,7 @@ object WordsAnalyzer extends App {
 
   def removePunctuationAndDigitCharacters(s: String) = {
     val toRemovePattern = """<br>|[0-9]|["\,\.!\?\-]""".r;
-    toRemovePattern.replaceAllIn(s.toLowerCase, "")
+    toRemovePattern.replaceAllIn(s.toLowerCase, " ")
   }
 
   def mostPopularWord(lines: Iterable[String], limit: Int) = {
