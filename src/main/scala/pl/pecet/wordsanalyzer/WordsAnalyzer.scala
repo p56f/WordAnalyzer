@@ -1,6 +1,8 @@
 package pl.pecet.wordsanalyzer
 
-import scala.io.Source
+import java.nio.charset.StandardCharsets
+
+import scala.io.{Codec, Source}
 
 object WordsAnalyzer extends App {
   val episodes = Map(
@@ -19,7 +21,7 @@ object WordsAnalyzer extends App {
 
   def findEpisodeDialogs(season: String, episode: Int) = {
     val url = f"http://www.springfieldspringfield.co.uk/view_episode_scripts.php?tv-show=friends&episode=${season}e$episode%02d"
-    val html = Source.fromURL(url)
+    val html = Source.fromURL(url, StandardCharsets.UTF_8.name())
     val divPattern = """(?s)<div class="scrolling-script-container">(.*?)</div>""".r
     divPattern.findFirstMatchIn(html.mkString) match {
       case Some(m) => m.group(1).trim

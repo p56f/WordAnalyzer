@@ -1,5 +1,5 @@
 name := "WordsAnalyzer"
-mainClass in Compile := Some("pl.pecet.wordsanalyzer.WordsAnazyler")
+mainClass in Compile := Some("pl.pecet.wordsanalyzer.WordsAnalyzer")
 
 version := "1.0"
 
