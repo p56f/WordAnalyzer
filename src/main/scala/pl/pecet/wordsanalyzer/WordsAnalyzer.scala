@@ -2,7 +2,7 @@ package pl.pecet.wordsanalyzer
 
 import java.nio.charset.StandardCharsets
 
-import scala.io.{Codec, Source}
+import scala.io.Source
 
 object WordsAnalyzer extends App {
   val episodes = Map(
